@@ -42,88 +42,112 @@ defined('ABSPATH') || exit;
   
   <?php do_action( 'bootscore_before_masthead' ); ?>
 
-  <header id="masthead" class="<?= apply_filters('bootscore/class/header', 'sticky-top bg-body-tertiary'); ?> site-header">
+  <header id="masthead" class="site-header hram-header">
 
     <?php do_action( 'bootscore_after_masthead_open' ); ?>
-    
-    <nav id="nav-main" class="navbar <?= apply_filters('bootscore/class/header/navbar/breakpoint', 'navbar-expand-lg'); ?>">
 
-      <div class="<?= apply_filters('bootscore/class/container', 'container', 'header'); ?>">
-        
-        <?php do_action( 'bootscore_before_navbar_brand' ); ?>
-        
-        <!-- Navbar Brand -->
-        <a class="<?= apply_filters('bootscore/class/header/navbar-brand', 'navbar-brand'); ?>" href="<?= esc_url(home_url()); ?>">
-          <img src="<?= esc_url(apply_filters('bootscore/logo', get_stylesheet_directory_uri() . '/assets/img/logo/logo.svg', 'default')); ?>" alt="<?php bloginfo('name'); ?> Logo" class="d-td-none">
-          <img src="<?= esc_url(apply_filters('bootscore/logo', get_stylesheet_directory_uri() . '/assets/img/logo/logo-theme-dark.svg', 'theme-dark')); ?>" alt="<?php bloginfo('name'); ?> Logo" class="d-tl-none">
-        </a>  
-        
-        <?php do_action( 'bootscore_after_navbar_brand' ); ?>
+    <div class="hram-header__blessing">
+      <span><?php esc_html_e('по благословению митрополита Симбирского и Новоспасского Лонгина', 'bootscore'); ?></span>
+    </div>
 
-        <!-- Offcanvas Navbar -->
-        <div class="offcanvas offcanvas-<?= apply_filters('bootscore/class/header/offcanvas/direction', 'end', 'menu'); ?>" tabindex="-1" id="offcanvas-navbar">
-          <div class="offcanvas-header <?= apply_filters('bootscore/class/offcanvas/header', '', 'menu'); ?>">
-            <span class="h5 offcanvas-title"><?= apply_filters('bootscore/offcanvas/navbar/title', __('Menu', 'bootscore')); ?></span>
-            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-          </div>
-          <div class="offcanvas-body <?= apply_filters('bootscore/class/offcanvas/body', '', 'menu'); ?>">
+    <div class="hram-header__mobile-bar container-fluid px-3 d-lg-none">
+      <a class="hram-header__mobile-logo" href="<?= esc_url(home_url()); ?>">
+        <img src="<?= esc_url('https://nevsky-simbirsk.ru/wp-content/uploads/2025/10/hapka-1.svg'); ?>" alt="<?php bloginfo('name'); ?> Logo" loading="lazy">
+      </a>
+      <button class="hram-header__toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvas-navbar" aria-controls="offcanvas-navbar" aria-label="<?php esc_attr_e( 'Toggle main menu', 'bootscore' ); ?>">
+        <span class="hram-header__toggler-line"></span>
+        <span class="hram-header__toggler-line"></span>
+        <span class="hram-header__toggler-line"></span>
+      </button>
+    </div>
 
-            <!-- Bootstrap 5 Nav Walker Main Menu -->
-            <?php get_template_part('template-parts/header/main-menu'); ?>
+    <div class="hram-header__main container-fluid px-3 px-lg-5 d-none d-lg-flex">
+      <div class="hram-header__identity">
+        <a class="hram-header__identity-link" href="<?= esc_url(home_url()); ?>">
+          <img src="<?= esc_url('https://nevsky-simbirsk.ru/wp-content/uploads/2025/10/hapka-1.svg'); ?>" alt="<?php bloginfo('name'); ?> Logo" loading="lazy">
+        </a>
+        <div class="hram-header__identity-text">
+          <span class="hram-header__identity-title"><?php esc_html_e('Храм во имя святого благоверного князя Александра Невского', 'bootscore'); ?></span>
+          <span class="hram-header__identity-subtitle"><?php esc_html_e('Симбирская митрополия Русской Православной Церкви', 'bootscore'); ?></span>
+        </div>
+      </div>
+      <div class="hram-header__contacts">
+        <a href="https://vk.com" class="hram-header__contact" target="_blank" rel="noopener" aria-label="ВКонтакте">
+          <i class="fa-brands fa-vk" aria-hidden="true"></i>
+        </a>
+        <a href="https://t.me" class="hram-header__contact" target="_blank" rel="noopener" aria-label="Telegram">
+          <i class="fa-brands fa-telegram-plane" aria-hidden="true"></i>
+        </a>
+        <a href="mailto:info@nevsky-simbirsk.ru" class="hram-header__contact" aria-label="Email">
+          <i class="fa-regular fa-envelope" aria-hidden="true"></i>
+        </a>
+        <a href="tel:+78422000000" class="hram-header__contact hram-header__contact--phone" aria-label="Позвонить">
+          <i class="fa-solid fa-phone" aria-hidden="true"></i>
+          <span>+7 (8422) 00-00-00</span>
+        </a>
+      </div>
+    </div>
 
-            <!-- Top Nav 2 Widget -->
-            <?php if (is_active_sidebar('top-nav-2')) : ?>
-              <?php dynamic_sidebar('top-nav-2'); ?>
-            <?php endif; ?>
+    <div class="hram-header__divider container-fluid px-3 px-lg-5">
+      <div class="hram-header__divider-line"></div>
+      <img src="<?= esc_url('https://nevsky-simbirsk.ru/wp-content/uploads/2025/10/ikonka-1.svg'); ?>" alt="<?php esc_attr_e('Декоративный элемент', 'bootscore'); ?>" class="hram-header__divider-logo" loading="lazy">
+      <div class="hram-header__divider-line"></div>
+    </div>
 
-          </div>
+    <div class="hram-header__menu container-fluid px-3 px-lg-5 d-none d-lg-flex">
+      <?php
+      wp_nav_menu(array(
+        'theme_location' => 'main-menu',
+        'container'      => false,
+        'menu_class'     => 'hram-header__menu-list',
+        'fallback_cb'    => '__return_false',
+        'depth'          => 2,
+        'walker'         => new bootstrap_5_wp_nav_menu_walker(),
+      ));
+      ?>
+    </div>
+
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvas-navbar">
+      <div class="offcanvas-header">
+        <span class="h5 offcanvas-title"><?= apply_filters('bootscore/offcanvas/navbar/title', __('Меню', 'bootscore')); ?></span>
+        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="<?php esc_attr_e( 'Close', 'bootscore' ); ?>"></button>
+      </div>
+      <div class="offcanvas-body">
+        <div class="hram-header__offcanvas-contacts d-lg-none">
+          <a href="https://vk.com" class="hram-header__contact" target="_blank" rel="noopener" aria-label="ВКонтакте">
+            <i class="fa-brands fa-vk" aria-hidden="true"></i>
+          </a>
+          <a href="https://t.me" class="hram-header__contact" target="_blank" rel="noopener" aria-label="Telegram">
+            <i class="fa-brands fa-telegram-plane" aria-hidden="true"></i>
+          </a>
+          <a href="mailto:info@nevsky-simbirsk.ru" class="hram-header__contact" aria-label="Email">
+            <i class="fa-regular fa-envelope" aria-hidden="true"></i>
+          </a>
+          <a href="tel:+78422000000" class="hram-header__contact hram-header__contact--phone" aria-label="Позвонить">
+            <i class="fa-solid fa-phone" aria-hidden="true"></i>
+            <span>+7 (8422) 00-00-00</span>
+          </a>
         </div>
 
-        <div class="header-actions <?= apply_filters('bootscore/class/header-actions', 'd-flex align-items-center'); ?>">
+        <?php get_template_part('template-parts/header/main-menu'); ?>
 
-          <!-- Top Nav Widget -->
-          <?php if (is_active_sidebar('top-nav')) : ?>
-            <?php dynamic_sidebar('top-nav'); ?>
-          <?php endif; ?>
-
-          <?php
-          if (class_exists('WooCommerce')) :
-            get_template_part('template-parts/header/actions', 'woocommerce');
-          else :
-            get_template_part('template-parts/header/actions');
-          endif;
-          ?>
-
-          <!-- Navbar Toggler -->
-          <button class="<?= apply_filters('bootscore/class/header/button', 'btn btn-outline-secondary', 'nav-toggler'); ?> <?= apply_filters('bootscore/class/header/navbar/toggler/breakpoint', 'd-lg-none'); ?> <?= apply_filters('bootscore/class/header/action/spacer', 'ms-1 ms-md-2', 'nav-toggler'); ?> nav-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvas-navbar" aria-controls="offcanvas-navbar" aria-label="<?php esc_attr_e( 'Toggle main menu', 'bootscore' ); ?>">
-            <?= apply_filters('bootscore/icon/menu', '<i class="fa-solid fa-bars"></i>'); ?> <span class="visually-hidden-focusable">Menu</span>
-          </button>
-          
-          <?php do_action( 'bootscore_after_nav_toggler' ); ?>
-
-        </div><!-- .header-actions -->
-
-      </div><!-- .container -->
-
-    </nav><!-- .navbar -->
+        <?php if (is_active_sidebar('top-nav-2')) : ?>
+          <?php dynamic_sidebar('top-nav-2'); ?>
+        <?php endif; ?>
+      </div>
+    </div>
 
     <?php
     if (class_exists('WooCommerce')) :
       get_template_part('template-parts/header/collapse-search', 'woocommerce');
+      get_template_part('template-parts/header/offcanvas', 'woocommerce');
     else :
       get_template_part('template-parts/header/collapse-search');
     endif;
     ?>
 
-    <!-- Offcanvas User and Cart -->
-    <?php
-    if (class_exists('WooCommerce')) :
-      get_template_part('template-parts/header/offcanvas', 'woocommerce');
-    endif;
-    ?>
-
     <?php do_action( 'bootscore_before_masthead_close' ); ?>
-    
+
   </header><!-- #masthead -->
-  
+
   <?php do_action( 'bootscore_after_masthead' ); ?>
