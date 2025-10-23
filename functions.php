@@ -79,6 +79,39 @@ if (apply_filters('bootscore/disable/unsupported/blocks', false)) {
 
 
 /**
+ * Disable theme updates
+ */
+function hram_disable_theme_updates($value) {
+  if (!is_object($value) || !isset($value->response) || !is_array($value->response)) {
+    return $value;
+  }
+
+  $stylesheet = get_stylesheet();
+
+  if (isset($value->response[$stylesheet])) {
+    unset($value->response[$stylesheet]);
+  }
+
+  return $value;
+}
+add_filter('site_transient_update_themes', 'hram_disable_theme_updates');
+add_filter('auto_update_theme', '__return_false');
+
+
+/**
+ * Use the classic editor for posts
+ */
+function hram_disable_block_editor_for_posts($use_block_editor, $post_type) {
+  if ('post' === $post_type) {
+    return false;
+  }
+
+  return $use_block_editor;
+}
+add_filter('use_block_editor_for_post_type', 'hram_disable_block_editor_for_posts', 10, 2);
+
+
+/**
  * Load WooCommerce scripts if plugin is activated
  */
 if (class_exists('WooCommerce')) {
