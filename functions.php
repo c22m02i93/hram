@@ -52,6 +52,7 @@ require_once('inc/template-functions.php');      // Functions which enhance the 
 require_once('inc/widgets.php');                 // Register widget area and disables Gutenberg in widgets
 require_once('inc/deprecated.php');              // Fallback functions being dropped in v6
 require_once('inc/tinymce-editor.php');          // Fix body margin and font-family in backend if classic editor is used
+require_once('inc/custom-post-types.php');       // Custom post types and meta fields
 
 // Blocks
 // Patterns
