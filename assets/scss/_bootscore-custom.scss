@@ -46,6 +46,20 @@
     width: auto;
   }
 
+  &__mobile-actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 0.75rem;
+    flex: 1 1 auto;
+  }
+
+  &__widget-area {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
   &__toggler {
     background: transparent;
     border: 0;
@@ -73,15 +87,44 @@
     justify-content: space-between;
     padding: 1rem 0;
     gap: 1.5rem;
+    flex-wrap: wrap;
   }
 
-  &__logo {
+  &__identity {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    flex: 1 1 40%;
+    min-width: 320px;
+  }
+
+  &__identity-link {
+    display: inline-flex;
     flex-shrink: 0;
   }
 
-  &__logo img {
+  &__identity-link img {
     height: 88px;
     width: auto;
+  }
+
+  &__identity-text {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  &__identity-title {
+    font-weight: 700;
+    font-size: 1.125rem;
+    line-height: 1.35;
+  }
+
+  &__identity-subtitle {
+    font-size: 0.95rem;
+    font-weight: 500;
+    line-height: 1.35;
+    max-width: 420px;
   }
 
   &__contacts {
@@ -89,8 +132,9 @@
     align-items: center;
     gap: 0.5rem;
     flex-wrap: wrap;
-    flex: 1 1 auto;
-    justify-content: flex-start;
+    flex: 1 1 30%;
+    justify-content: center;
+    min-width: 220px;
   }
 
   &__contact {
@@ -129,6 +173,15 @@
     span {
       white-space: nowrap;
     }
+  }
+
+  &__actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 0.75rem;
+    flex: 1 1 30%;
+    min-width: 220px;
   }
 
   &__divider {
