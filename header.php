@@ -42,26 +42,54 @@ defined('ABSPATH') || exit;
   
   <?php do_action( 'bootscore_before_masthead' ); ?>
 
-  <header id="masthead" class="site-header hram-header">
+  <header id="masthead" class="site-header hram-header <?= esc_attr(apply_filters('bootscore/class/header', 'sticky-top bg-body-tertiary')); ?>">
 
     <?php do_action( 'bootscore_after_masthead_open' ); ?>
-
+    
     <div class="hram-header__blessing">
       <span><?php esc_html_e('по благословению митрополита Симбирского и Новоспасского Лонгина', 'bootscore'); ?></span>
     </div>
 
-    <div class="hram-header__mobile-bar container d-lg-none">
-      <button class="hram-header__toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvas-navbar" aria-controls="offcanvas-navbar" aria-label="<?php esc_attr_e( 'Toggle main menu', 'bootscore' ); ?>">
-        <span class="hram-header__toggler-line"></span>
-        <span class="hram-header__toggler-line"></span>
-        <span class="hram-header__toggler-line"></span>
-      </button>
+    <div class="hram-header__mobile-bar container-fluid px-3 d-lg-none">
       <a class="hram-header__mobile-logo" href="<?= esc_url(home_url()); ?>">
         <img src="<?= esc_url('https://nevsky-simbirsk.ru/wp-content/uploads/2025/10/hapka-1.svg'); ?>" alt="<?php bloginfo('name'); ?> Logo" loading="lazy">
       </a>
+      <div class="hram-header__mobile-actions <?= esc_attr(apply_filters('bootscore/class/header-actions', 'd-flex align-items-center')); ?>">
+        <?php if (is_active_sidebar('top-nav')) : ?>
+          <div class="hram-header__widget-area d-flex align-items-center">
+            <?php dynamic_sidebar('top-nav'); ?>
+          </div>
+        <?php endif; ?>
+
+        <?php
+        if (class_exists('WooCommerce')) :
+          get_template_part('template-parts/header/actions', 'woocommerce');
+        else :
+          get_template_part('template-parts/header/actions');
+        endif;
+        ?>
+
+        <button class="hram-header__toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvas-navbar" aria-controls="offcanvas-navbar" aria-label="<?php esc_attr_e( 'Toggle main menu', 'bootscore' ); ?>">
+          <span class="hram-header__toggler-line"></span>
+          <span class="hram-header__toggler-line"></span>
+          <span class="hram-header__toggler-line"></span>
+        </button>
+
+        <?php do_action( 'bootscore_after_nav_toggler' ); ?>
+      </div>
     </div>
 
-    <div class="hram-header__main container d-none d-lg-flex">
+    <div class="hram-header__main container-fluid px-3 px-lg-5 d-none d-lg-flex">
+      <div class="hram-header__identity">
+        <a class="hram-header__identity-link" href="<?= esc_url(home_url()); ?>">
+          <img src="<?= esc_url('https://nevsky-simbirsk.ru/wp-content/uploads/2025/10/hapka-1.svg'); ?>" alt="<?php bloginfo('name'); ?> Logo" loading="lazy">
+        </a>
+        <div class="hram-header__identity-text">
+          <span class="hram-header__identity-title"><?php esc_html_e('Храм во имя святого благоверного князя Александра Невского', 'bootscore'); ?></span>
+          <span class="hram-header__identity-subtitle"><?php esc_html_e('Симбирская митрополия Русской Православной Церкви', 'bootscore'); ?></span>
+        </div>
+      </div>
+
       <div class="hram-header__contacts">
         <a href="https://vk.com" class="hram-header__contact" target="_blank" rel="noopener" aria-label="ВКонтакте">
           <i class="fa-brands fa-vk" aria-hidden="true"></i>
@@ -77,18 +105,31 @@ defined('ABSPATH') || exit;
           <span>+7 (8422) 00-00-00</span>
         </a>
       </div>
-      <a class="hram-header__logo" href="<?= esc_url(home_url()); ?>">
-        <img src="<?= esc_url('https://nevsky-simbirsk.ru/wp-content/uploads/2025/10/hapka-1.svg'); ?>" alt="<?php bloginfo('name'); ?> Logo" loading="lazy">
-      </a>
+
+      <div class="hram-header__actions <?= esc_attr(apply_filters('bootscore/class/header-actions', 'd-flex align-items-center')); ?>">
+        <?php if (is_active_sidebar('top-nav')) : ?>
+          <div class="hram-header__widget-area">
+            <?php dynamic_sidebar('top-nav'); ?>
+          </div>
+        <?php endif; ?>
+
+        <?php
+        if (class_exists('WooCommerce')) :
+          get_template_part('template-parts/header/actions', 'woocommerce');
+        else :
+          get_template_part('template-parts/header/actions');
+        endif;
+        ?>
+      </div>
     </div>
 
-    <div class="hram-header__divider container">
+    <div class="hram-header__divider container-fluid px-3 px-lg-5">
       <div class="hram-header__divider-line"></div>
       <img src="<?= esc_url('https://nevsky-simbirsk.ru/wp-content/uploads/2025/10/ikonka-1.svg'); ?>" alt="<?php esc_attr_e('Декоративный элемент', 'bootscore'); ?>" class="hram-header__divider-logo" loading="lazy">
       <div class="hram-header__divider-line"></div>
     </div>
 
-    <div class="hram-header__menu container d-none d-lg-flex">
+    <div class="hram-header__menu container-fluid px-3 px-lg-5 d-none d-lg-flex">
       <?php
       wp_nav_menu(array(
         'theme_location' => 'main-menu',
@@ -141,7 +182,7 @@ defined('ABSPATH') || exit;
     ?>
 
     <?php do_action( 'bootscore_before_masthead_close' ); ?>
-
+    
   </header><!-- #masthead -->
-
+  
   <?php do_action( 'bootscore_after_masthead' ); ?>
